@@ -20,6 +20,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.edu.atitus.pooavancado.atitusound.entities.GenericEntity;
 import br.edu.atitus.pooavancado.atitusound.services.GenericService;
+import io.swagger.v3.oas.annotations.headers.Header;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
+@ApiResponses ( value = {
+@ApiResponse(responseCode = "400", description = "ERRO DE VALIDAÇÃO OU REQUISIÇÃO INVÁLIDA",
+		content = @Content, headers = @Header(name = "error", description = "Descrição do Erro", schema = @Schema(implementation = String.class))),
+@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content),
+@ApiResponse(responseCode = "403", description = "FORBIDDEN", content =@Content)
+})
 
 public abstract class GenericController<TEntidade extends GenericEntity, TDTO> {
 
@@ -50,6 +62,7 @@ public abstract class GenericController<TEntidade extends GenericEntity, TDTO> {
 	}
 	
 	@GetMapping("/{uuid}")
+
 	public ResponseEntity<TEntidade> getByUuid(@PathVariable UUID uuid) {
 		Optional<TEntidade> entidade;
 		try {
@@ -64,6 +77,7 @@ public abstract class GenericController<TEntidade extends GenericEntity, TDTO> {
 	}
 	
 	@GetMapping
+	@ApiResponse(responseCode = "200", description = "OK")
 	public ResponseEntity<Page<List<TEntidade>>> getAll(@PageableDefault(page = 0, size = 10, sort = "name", direction = Direction.ASC) Pageable pageable,
 							@RequestParam String name) {
 		Page<List<TEntidade>> entidades;
@@ -76,6 +90,7 @@ public abstract class GenericController<TEntidade extends GenericEntity, TDTO> {
 	}
 
 	@PostMapping
+	@ApiResponse(responseCode = "201", description = "REGISTRO CRIADO COM SUCESSO!")
 	public ResponseEntity<TEntidade> save(@RequestBody TDTO dto) {
 		TEntidade entidade = convertDTO2Entity(dto);
 		try {

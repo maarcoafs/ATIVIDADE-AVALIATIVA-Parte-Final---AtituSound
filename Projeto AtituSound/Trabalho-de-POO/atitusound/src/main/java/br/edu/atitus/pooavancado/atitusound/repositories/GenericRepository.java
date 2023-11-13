@@ -8,12 +8,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
-import br.edu.atitus.pooavancado.atitusound.entities.ArtistEntity;
 import br.edu.atitus.pooavancado.atitusound.entities.GenericEntity;
 
 @NoRepositoryBean
 public interface GenericRepository<TEntity extends GenericEntity> extends JpaRepository<TEntity, UUID>{
-
+	
 	Boolean existsByName(String name);
 	
 	Boolean existsByNameAndUuidNot(String name, UUID uuid);

@@ -1,6 +1,6 @@
 Desenvolvido por: Leonardo Grotto e Marco Antônio Flores da Silva
 
-Projeto: AtituSound(Parte Final)
+Projeto: AtituSound(Parte Final)</br>
 Curso: Ciência da Computação
 Disciplina: Programação Orientada a Objetos Avançada(POO)
 Professor: Luciano Rodrigo Ferretto
